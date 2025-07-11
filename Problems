@@ -22,7 +22,7 @@ public:
     }
 };
 
-Leetcode 22 : Generate  Parenthesis
+##Leetcode 22 : Generate  Parenthesis
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
@@ -44,7 +44,7 @@ public:
     }
 };
 
-Leetcode 51: N-Queens
+##Leetcode 51: N-Queens
 class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
@@ -78,7 +78,7 @@ public:
     }
 };
 
-Leetcode 52: N-Queens 2
+##Leetcode 52: N-Queens 2
 class Solution {
 public:
     int totalNQueens(int n) {
@@ -100,7 +100,7 @@ public:
             cols[col] = diag1[row + col] = diag2[row - col + n - 1] = false;
         }
 
-LeetCode 65 : Valid Number
+##LeetCode 65 : Valid Number
 class Solution {
 public:
     bool isNumber(string s) {
@@ -141,7 +141,7 @@ public:
 };
 
 
-LeetCode 68: Text Justification
+##LeetCode 68: Text Justification
 class Solution {
 public:
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
@@ -187,7 +187,7 @@ public:
     }
 };
 
-Leetcode 60: Permutation Sequence
+##Leetcode 60: Permutation Sequence
 class Solution {
 public:
     string getPermutation(int n, int k) {
@@ -213,4 +213,4 @@ public:
     }
 };
 
-
+##Leetcode 54:Spiral Matrix
