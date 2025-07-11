@@ -1,1 +1,107 @@
 
+Leetcode #21: Merge Two sorted list: 
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode dummy(0);
+        ListNode* tail = &dummy;
+
+        while (list1 && list2) {
+            if (list1->val < list2->val) {
+                tail->next = list1;
+                list1 = list1->next;
+            } else {
+                tail->next = list2;
+                list2 = list2->next;
+            }
+            tail = tail->next;
+        }
+
+        tail->next = list1 ? list1 : list2;
+        return dummy.next;
+    }
+};
+
+Leetcode 22 : Generate  Parenthesis
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;
+        backtrack(result, "", 0, 0, n);
+        return result;
+    }
+
+    void backtrack(vector<string>& result, string current, int open, int close, int max) {
+        if (current.length() == max * 2) {
+            result.push_back(current);
+            return;
+        }
+
+        if (open < max)
+            backtrack(result, current + "(", open + 1, close, max);
+        if (close < open)
+            backtrack(result, current + ")", open, close + 1, max);
+    }
+};
+
+Leetcode 51: N-Queens
+class Solution {
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> result;
+        vector<string> board(n, string(n, '.'));
+        vector<bool> cols(n), diag1(2 * n - 1), diag2(2 * n - 1);
+        backtrack(0, n, board, cols, diag1, diag2, result);
+        return result;
+    }
+
+    void backtrack(int row, int n, vector<string>& board,
+                   vector<bool>& cols, vector<bool>& diag1,
+                   vector<bool>& diag2, vector<vector<string>>& result) {
+        if (row == n) {
+            result.push_back(board);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            if (cols[col] || diag1[row + col] || diag2[row - col + n - 1])
+                continue;
+
+            board[row][col] = 'Q';
+            cols[col] = diag1[row + col] = diag2[row - col + n - 1] = true;
+
+            backtrack(row + 1, n, board, cols, diag1, diag2, result);
+
+            board[row][col] = '.';
+            cols[col] = diag1[row + col] = diag2[row - col + n - 1] = false;
+        }
+    }
+};
+
+Leetcode 52: N-Queens 2
+class Solution {
+public:
+    int totalNQueens(int n) {
+        vector<bool> cols(n);
+        vector<bool> diag1(2 * n - 1);
+        vector<bool> diag2(2 * n - 1);
+        return solve(0, n, cols, diag1, diag2);
+    }
+
+    int solve(int row, int n, vector<bool>& cols, vector<bool>& diag1, vector<bool>& diag2) {
+        if (row == n) return 1;
+        int count = 0;
+
+        for (int col = 0; col < n; ++col) {
+            if (cols[col] || diag1[row + col] || diag2[row - col + n - 1]) continue;
+
+            cols[col] = diag1[row + col] = diag2[row - col + n - 1] = true;
+            count += solve(row + 1, n, cols, diag1, diag2);
+            cols[col] = diag1[row + col] = diag2[row - col + n - 1] = false;
+        }
+
+        return count;
+    }
+};
+
+LeetCode 65: Valid Number
