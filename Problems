@@ -142,3 +142,75 @@ public:
 
 
 LeetCode 68: Text Justification
+class Solution {
+public:
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        vector<string> result;
+        int i = 0, n = words.size();
+
+        while (i < n) {
+            int lineLen = words[i].size();
+            int j = i + 1;
+
+            while (j < n && lineLen + words[j].size() + (j - i) <= maxWidth) {
+                lineLen += words[j].size();
+                j++;
+            }
+
+            int gaps = j - i - 1;
+            string line;
+
+            if (j == n || gaps == 0) {
+                // Last line or line with one word
+                for (int k = i; k < j; ++k) {
+                    line += words[k];
+                    if (k < j - 1) line += " ";
+                }
+                line += string(maxWidth - line.size(), ' ');
+            } else {
+                int totalSpaces = maxWidth - lineLen;
+                int space = totalSpaces / gaps;
+                int extra = totalSpaces % gaps;
+
+                for (int k = i; k < j - 1; ++k) {
+                    line += words[k];
+                    line += string(space + (k - i < extra ? 1 : 0), ' ');
+                }
+                line += words[j - 1];
+            }
+
+            result.push_back(line);
+            i = j;
+        }
+
+        return result;
+    }
+};
+
+Leetcode 60: Permutation Sequence
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        vector<int> nums;
+        for (int i = 1; i <= n; ++i)
+            nums.push_back(i);
+
+        vector<int> fact(n, 1);
+        for (int i = 1; i < n; ++i)
+            fact[i] = fact[i - 1] * i;
+
+        k--; // convert to 0-based index
+        string result;
+
+        for (int i = n; i >= 1; --i) {
+            int idx = k / fact[i - 1];
+            k %= fact[i - 1];
+            result += to_string(nums[idx]);
+            nums.erase(nums.begin() + idx);
+        }
+
+        return result;
+    }
+};
+
+
