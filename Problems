@@ -44,7 +44,7 @@ public:
     }
 };
 
-##Leetcode 51: N-Queens
+##Leetcode 51: N-Queens:
 class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
