@@ -22,7 +22,7 @@ public:
     }
 };
 
-##Leetcode 22 : Generate  Parenthesis
+Leetcode 22 : Generate  Parenthesis
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
